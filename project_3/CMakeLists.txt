@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.8)
+project(cjpeg)
+set(CMAKE_CXX_STANDARD 98)
+set(SOURCE_FILES src/cjpeg.c src/cio.c src/cmarker.c src/rdbmp.c)
+add_executable(cjpeg ${SOURCE_FILES})
