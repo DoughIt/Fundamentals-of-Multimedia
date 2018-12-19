@@ -204,6 +204,33 @@ src/cmarker.c.s:
 	$(MAKE) -f CMakeFiles/cjpeg.dir/build.make CMakeFiles/cjpeg.dir/src/cmarker.c.s
 .PHONY : src/cmarker.c.s
 
+src/fdctflt.o: src/fdctflt.c.o
+
+.PHONY : src/fdctflt.o
+
+# target to build an object file
+src/fdctflt.c.o:
+	$(MAKE) -f CMakeFiles/cjpeg.dir/build.make CMakeFiles/cjpeg.dir/src/fdctflt.c.o
+.PHONY : src/fdctflt.c.o
+
+src/fdctflt.i: src/fdctflt.c.i
+
+.PHONY : src/fdctflt.i
+
+# target to preprocess a source file
+src/fdctflt.c.i:
+	$(MAKE) -f CMakeFiles/cjpeg.dir/build.make CMakeFiles/cjpeg.dir/src/fdctflt.c.i
+.PHONY : src/fdctflt.c.i
+
+src/fdctflt.s: src/fdctflt.c.s
+
+.PHONY : src/fdctflt.s
+
+# target to generate assembly for a file
+src/fdctflt.c.s:
+	$(MAKE) -f CMakeFiles/cjpeg.dir/build.make CMakeFiles/cjpeg.dir/src/fdctflt.c.s
+.PHONY : src/fdctflt.c.s
+
 src/rdbmp.o: src/rdbmp.c.o
 
 .PHONY : src/rdbmp.o
@@ -249,6 +276,9 @@ help:
 	@echo "... src/cmarker.o"
 	@echo "... src/cmarker.i"
 	@echo "... src/cmarker.s"
+	@echo "... src/fdctflt.o"
+	@echo "... src/fdctflt.i"
+	@echo "... src/fdctflt.s"
 	@echo "... src/rdbmp.o"
 	@echo "... src/rdbmp.i"
 	@echo "... src/rdbmp.s"

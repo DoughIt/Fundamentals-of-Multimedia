@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cio.c
+string.h
+-
+cjpeg.h
+/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cjpeg.h
+cio.h
+/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cio.h
+
+/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cio.h
+
+/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cjpeg.c
+cjpeg.h
+/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cjpeg.h
+cio.h
+/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cio.h
+
+/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cjpeg.h
+stdio.h
+-
+stdlib.h
+-
+

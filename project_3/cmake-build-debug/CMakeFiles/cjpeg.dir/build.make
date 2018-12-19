@@ -57,22 +57,9 @@ include CMakeFiles/cjpeg.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/cjpeg.dir/flags.make
 
-CMakeFiles/cjpeg.dir/src/cjpeg.c.o: CMakeFiles/cjpeg.dir/flags.make
-CMakeFiles/cjpeg.dir/src/cjpeg.c.o: ../src/cjpeg.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/cjpeg.dir/src/cjpeg.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cjpeg.dir/src/cjpeg.c.o   -c /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cjpeg.c
-
-CMakeFiles/cjpeg.dir/src/cjpeg.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cjpeg.dir/src/cjpeg.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cjpeg.c > CMakeFiles/cjpeg.dir/src/cjpeg.c.i
-
-CMakeFiles/cjpeg.dir/src/cjpeg.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cjpeg.dir/src/cjpeg.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cjpeg.c -o CMakeFiles/cjpeg.dir/src/cjpeg.c.s
-
 CMakeFiles/cjpeg.dir/src/cio.c.o: CMakeFiles/cjpeg.dir/flags.make
 CMakeFiles/cjpeg.dir/src/cio.c.o: ../src/cio.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/cjpeg.dir/src/cio.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/cjpeg.dir/src/cio.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cjpeg.dir/src/cio.c.o   -c /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cio.c
 
 CMakeFiles/cjpeg.dir/src/cio.c.i: cmake_force
@@ -85,7 +72,7 @@ CMakeFiles/cjpeg.dir/src/cio.c.s: cmake_force
 
 CMakeFiles/cjpeg.dir/src/cmarker.c.o: CMakeFiles/cjpeg.dir/flags.make
 CMakeFiles/cjpeg.dir/src/cmarker.c.o: ../src/cmarker.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/cjpeg.dir/src/cmarker.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/cjpeg.dir/src/cmarker.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cjpeg.dir/src/cmarker.c.o   -c /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cmarker.c
 
 CMakeFiles/cjpeg.dir/src/cmarker.c.i: cmake_force
@@ -95,6 +82,19 @@ CMakeFiles/cjpeg.dir/src/cmarker.c.i: cmake_force
 CMakeFiles/cjpeg.dir/src/cmarker.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cjpeg.dir/src/cmarker.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cmarker.c -o CMakeFiles/cjpeg.dir/src/cmarker.c.s
+
+CMakeFiles/cjpeg.dir/src/fdctflt.c.o: CMakeFiles/cjpeg.dir/flags.make
+CMakeFiles/cjpeg.dir/src/fdctflt.c.o: ../src/fdctflt.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/cjpeg.dir/src/fdctflt.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cjpeg.dir/src/fdctflt.c.o   -c /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/fdctflt.c
+
+CMakeFiles/cjpeg.dir/src/fdctflt.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cjpeg.dir/src/fdctflt.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/fdctflt.c > CMakeFiles/cjpeg.dir/src/fdctflt.c.i
+
+CMakeFiles/cjpeg.dir/src/fdctflt.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cjpeg.dir/src/fdctflt.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/fdctflt.c -o CMakeFiles/cjpeg.dir/src/fdctflt.c.s
 
 CMakeFiles/cjpeg.dir/src/rdbmp.c.o: CMakeFiles/cjpeg.dir/flags.make
 CMakeFiles/cjpeg.dir/src/rdbmp.c.o: ../src/rdbmp.c
@@ -109,23 +109,38 @@ CMakeFiles/cjpeg.dir/src/rdbmp.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cjpeg.dir/src/rdbmp.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/rdbmp.c -o CMakeFiles/cjpeg.dir/src/rdbmp.c.s
 
+CMakeFiles/cjpeg.dir/src/cjpeg.c.o: CMakeFiles/cjpeg.dir/flags.make
+CMakeFiles/cjpeg.dir/src/cjpeg.c.o: ../src/cjpeg.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/cjpeg.dir/src/cjpeg.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cjpeg.dir/src/cjpeg.c.o   -c /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cjpeg.c
+
+CMakeFiles/cjpeg.dir/src/cjpeg.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cjpeg.dir/src/cjpeg.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cjpeg.c > CMakeFiles/cjpeg.dir/src/cjpeg.c.i
+
+CMakeFiles/cjpeg.dir/src/cjpeg.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cjpeg.dir/src/cjpeg.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cjpeg.c -o CMakeFiles/cjpeg.dir/src/cjpeg.c.s
+
 # Object files for target cjpeg
 cjpeg_OBJECTS = \
-"CMakeFiles/cjpeg.dir/src/cjpeg.c.o" \
 "CMakeFiles/cjpeg.dir/src/cio.c.o" \
 "CMakeFiles/cjpeg.dir/src/cmarker.c.o" \
-"CMakeFiles/cjpeg.dir/src/rdbmp.c.o"
+"CMakeFiles/cjpeg.dir/src/fdctflt.c.o" \
+"CMakeFiles/cjpeg.dir/src/rdbmp.c.o" \
+"CMakeFiles/cjpeg.dir/src/cjpeg.c.o"
 
 # External object files for target cjpeg
 cjpeg_EXTERNAL_OBJECTS =
 
-cjpeg: CMakeFiles/cjpeg.dir/src/cjpeg.c.o
 cjpeg: CMakeFiles/cjpeg.dir/src/cio.c.o
 cjpeg: CMakeFiles/cjpeg.dir/src/cmarker.c.o
+cjpeg: CMakeFiles/cjpeg.dir/src/fdctflt.c.o
 cjpeg: CMakeFiles/cjpeg.dir/src/rdbmp.c.o
+cjpeg: CMakeFiles/cjpeg.dir/src/cjpeg.c.o
 cjpeg: CMakeFiles/cjpeg.dir/build.make
 cjpeg: CMakeFiles/cjpeg.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable cjpeg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable cjpeg"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cjpeg.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

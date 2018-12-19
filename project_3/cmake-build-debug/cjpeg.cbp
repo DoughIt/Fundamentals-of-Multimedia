@@ -99,6 +99,9 @@
 		<Unit filename="/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/cmarker.c">
 			<Option target="cjpeg"/>
 		</Unit>
+		<Unit filename="/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/fdctflt.c">
+			<Option target="cjpeg"/>
+		</Unit>
 		<Unit filename="/home/darkyoung/Learning/matlab/Fundamentals-of-Multimedia/project_3/src/rdbmp.c">
 			<Option target="cjpeg"/>
 		</Unit>

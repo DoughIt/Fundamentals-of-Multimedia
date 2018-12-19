@@ -1,8 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/cjpeg.dir/src/cjpeg.c.o"
   "CMakeFiles/cjpeg.dir/src/cio.c.o"
   "CMakeFiles/cjpeg.dir/src/cmarker.c.o"
+  "CMakeFiles/cjpeg.dir/src/fdctflt.c.o"
   "CMakeFiles/cjpeg.dir/src/rdbmp.c.o"
+  "CMakeFiles/cjpeg.dir/src/cjpeg.c.o"
   "cjpeg.pdb"
   "cjpeg"
 )

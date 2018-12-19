@@ -2,10 +2,8 @@
  * @file cjpeg.c
  * @brief main file, convert BMP to JPEG image.
  */
-
 #include "cjpeg.h"
 #include "cio.h"
-
 /* YCbCr to RGB transformation */
 
 /*
@@ -16,46 +14,50 @@
 
 ycbcr_tables ycc_tables;
 
-void
-init_ycbcr_tables()
-{
+void init_ycbcr_tables() {
     UINT16 i;
     for (i = 0; i < 256; i++) {
-        ycc_tables.r2y[i]  = (INT32)(65536 *  0.299   + 0.5) * i;
-        ycc_tables.r2cb[i] = (INT32)(65536 * -0.16874 + 0.5) * i;
-        ycc_tables.r2cr[i] = (INT32)(32768) * i;
-        ycc_tables.g2y[i]  = (INT32)(65536 *  0.587   + 0.5) * i;
-        ycc_tables.g2cb[i] = (INT32)(65536 * -0.33126 + 0.5) * i;
-        ycc_tables.g2cr[i] = (INT32)(65536 * -0.41869 + 0.5) * i;
-        ycc_tables.b2y[i]  = (INT32)(65536 *  0.114   + 0.5) * i;
-        ycc_tables.b2cb[i] = (INT32)(32768) * i;
-        ycc_tables.b2cr[i] = (INT32)(65536 * -0.08131 + 0.5) * i;
+        ycc_tables.r2y[i] = (INT32) (65536 * 0.299 + 0.5) * i;
+        ycc_tables.r2cb[i] = (INT32) (65536 * -0.16874 + 0.5) * i;
+        ycc_tables.r2cr[i] = (INT32) (32768) * i;
+        ycc_tables.g2y[i] = (INT32) (65536 * 0.587 + 0.5) * i;
+        ycc_tables.g2cb[i] = (INT32) (65536 * -0.33126 + 0.5) * i;
+        ycc_tables.g2cr[i] = (INT32) (65536 * -0.41869 + 0.5) * i;
+        ycc_tables.b2y[i] = (INT32) (65536 * 0.114 + 0.5) * i;
+        ycc_tables.b2cb[i] = (INT32) (32768) * i;
+        ycc_tables.b2cr[i] = (INT32) (65536 * -0.08131 + 0.5) * i;
     }
 }
 
-void
-rgb_to_ycbcr(UINT8 *rgb_unit, ycbcr_unit *ycc_unit, int x, int w)
-{
+void rgb_to_ycbcr(UINT8 *rgb_unit, ycbcr_unit *ycc_unit, int x, int w) {
     ycbcr_tables *tbl = &ycc_tables;
     UINT8 r, g, b;
+
     int src_pos = x * 3;
+#ifdef REVERSED
+    src_pos += w * (DCTSIZE - 1) * 3;
+#endif
     int dst_pos = 0;
     int i, j;
     for (j = 0; j < DCTSIZE; j++) {
         for (i = 0; i < DCTSIZE; i++) {
             b = rgb_unit[src_pos];
-            g = rgb_unit[src_pos+1];
-            r = rgb_unit[src_pos+2];
+            g = rgb_unit[src_pos + 1];
+            r = rgb_unit[src_pos + 2];
             ycc_unit->y[dst_pos] = (INT8) ((UINT8)
-                ((tbl->r2y[r] + tbl->g2y[g] + tbl->b2y[b]) >> 16) - 128);
+                                                   ((tbl->r2y[r] + tbl->g2y[g] + tbl->b2y[b]) >> 16) - 128);
             ycc_unit->cb[dst_pos] = (INT8) ((UINT8)
-                ((tbl->r2cb[r] + tbl->g2cb[g] + tbl->b2cb[b]) >> 16));
+                    ((tbl->r2cb[r] + tbl->g2cb[g] + tbl->b2cb[b]) >> 16));
             ycc_unit->cr[dst_pos] = (INT8) ((UINT8)
-                ((tbl->r2cr[r] + tbl->g2cr[g] + tbl->b2cr[b]) >> 16));
+                    ((tbl->r2cr[r] + tbl->g2cr[g] + tbl->b2cr[b]) >> 16));
             src_pos += 3;
             dst_pos++;
         }
+#ifdef REVERSED
+        src_pos -= (w + DCTSIZE) * 3;
+#elif
         src_pos += (w - DCTSIZE) * 3;
+#endif
     }
 }
 
@@ -64,9 +66,7 @@ rgb_to_ycbcr(UINT8 *rgb_unit, ycbcr_unit *ycc_unit, int x, int w)
 
 quant_tables q_tables;
 
-void
-init_quant_tables(UINT32 scale_factor)
-{
+void init_quant_tables(UINT32 scale_factor) {
     quant_tables *tbl = &q_tables;
     int temp1, temp2;
     int i;
@@ -87,22 +87,20 @@ init_quant_tables(UINT32 scale_factor)
     }
 }
 
-void
-jpeg_quant(ycbcr_unit *ycc_unit, quant_unit *q_unit)
-{
+void jpeg_quant(ycbcr_unit *ycc_unit, quant_unit *q_unit) {
     quant_tables *tbl = &q_tables;
     float q_lu, q_ch;
     int x, y, i = 0;
     for (x = 0; x < DCTSIZE; x++) {
         for (y = 0; y < DCTSIZE; y++) {
-            q_lu = 1.0 / ((double) tbl->lu[ZIGZAG[i]] * \
-                    AAN_SCALE_FACTOR[x] * AAN_SCALE_FACTOR[y] * 8.0);
-            q_ch = 1.0 / ((double) tbl->ch[ZIGZAG[i]] * \
-                    AAN_SCALE_FACTOR[x] * AAN_SCALE_FACTOR[y] * 8.0);
+            q_lu = (float) (1.0 / ((double) tbl->lu[ZIGZAG[i]] * \
+                                AAN_SCALE_FACTOR[x] * AAN_SCALE_FACTOR[y] * 8.0));
+            q_ch = (float) (1.0 / ((double) tbl->ch[ZIGZAG[i]] * \
+                                AAN_SCALE_FACTOR[x] * AAN_SCALE_FACTOR[y] * 8.0));
 
-            q_unit->y[i] = (INT16)(ycc_unit->y[i]*q_lu + 16384.5) - 16384;
-            q_unit->cb[i] = (INT16)(ycc_unit->cb[i]*q_ch + 16384.5) - 16384;
-            q_unit->cr[i] = (INT16)(ycc_unit->cr[i]*q_ch + 16384.5) - 16384;
+            q_unit->y[i] = (INT16) ((ycc_unit->y[i] * q_lu + 16384.5) - 16384);
+            q_unit->cb[i] = (INT16) ((ycc_unit->cb[i] * q_ch + 16384.5) - 16384);
+            q_unit->cr[i] = (INT16) ((ycc_unit->cr[i] * q_ch + 16384.5) - 16384);
 
             i++;
         }
@@ -114,15 +112,13 @@ jpeg_quant(ycbcr_unit *ycc_unit, quant_unit *q_unit)
 
 huff_tables h_tables;
 
-void
-set_huff_table(UINT8 *nrcodes, UINT8 *values, BITS *h_table)
-{
+void set_huff_table(UINT8 *nrcodes, UINT8 *values, BITS *h_table) {
     int i, j, k;
     j = 0;
     UINT16 value = 0;
     for (i = 1; i <= 16; i++) {
         for (k = 0; k < nrcodes[i]; k++) {
-            h_table[values[j]].len = i;
+            h_table[values[j]].len = (UINT8) i;
             h_table[values[j]].val = value;
             j++;
             value++;
@@ -131,9 +127,7 @@ set_huff_table(UINT8 *nrcodes, UINT8 *values, BITS *h_table)
     }
 }
 
-void
-init_huff_tables()
-{
+void init_huff_tables() {
     huff_tables *tbl = &h_tables;
     set_huff_table(STD_LU_DC_NRCODES, STD_LU_DC_VALUES, tbl->lu_dc);
     set_huff_table(STD_LU_AC_NRCODES, STD_LU_AC_VALUES, tbl->lu_ac);
@@ -141,14 +135,21 @@ init_huff_tables()
     set_huff_table(STD_CH_AC_NRCODES, STD_CH_AC_VALUES, tbl->ch_ac);
 }
 
-void
-set_bits(BITS *bits, INT16 data)
-{
+void set_bits(BITS *bits, INT16 data) {
     /******************************************************/
     /*                                                    */
     /*             finish the missing codes               */
     /*                                                    */
     /******************************************************/
+
+    UINT16 pos_data;
+    int i;
+    pos_data = (UINT16) (data < 0 ? ~data + 1 : data);
+    for (i = 15; i >= 0; i--)
+        if ((pos_data & (1 << i)) != 0)
+            break;
+    bits->len = (UINT8) (i + 1);
+    bits->val = (UINT16) (data < 0 ? data + (1 << bits->len) - 1 : data);
 }
 
 #ifdef DEBUG
@@ -162,10 +163,8 @@ print_bits(BITS bits)
 /*
  * compress JPEG
  */
-void
-jpeg_compress(compress_io *cio,
-        INT16 *data, INT16 *dc, BITS *dc_htable, BITS *ac_htable)
-{
+void jpeg_compress(compress_io *cio,
+                   INT16 *data, INT16 *dc, BITS *dc_htable, BITS *ac_htable) {
     INT16 zigzag_data[DCTSIZE2];
     BITS bits;
     INT16 diff;
@@ -216,9 +215,7 @@ jpeg_compress(compress_io *cio,
 /*
  * main JPEG encoding
  */
-void
-jpeg_encode(compress_io *cio, bmp_info *binfo)
-{
+void jpeg_encode(compress_io *cio, bmp_info *binfo) {
     /* init tables */
     UINT32 scale = 50;
     init_ycbcr_tables();
@@ -240,6 +237,11 @@ jpeg_encode(compress_io *cio, bmp_info *binfo)
     int x, y;
 
     int offset = binfo->offset;
+#ifdef REVERSED
+    int in_size = (int) (in->end - in->set);
+    offset += (binfo->datasize / in_size - 1) * in_size;
+#endif
+
     fseek(in->fp, offset, SEEK_SET);
 
     /******************************************************/
@@ -247,6 +249,35 @@ jpeg_encode(compress_io *cio, bmp_info *binfo)
     /*             finish the missing codes               */
     /*                                                    */
     /******************************************************/
+
+    for (y = 0; y < binfo->height; y += 8) {
+
+        /* flush input buffer */
+        if (!(in->flush_buffer)(cio))
+            err_exit(BUFFER_READ_ERR);
+
+        for (x = 0; x < binfo->width; x += 8) {
+
+            /* convert RGB unit to YCbCr unit */
+            rgb_to_ycbcr(in->set, &ycc_unit, x, binfo->width);
+
+            /* forward DCT on YCbCr unit */
+            jpeg_fdct(ycc_unit.y);
+            jpeg_fdct(ycc_unit.cb);
+            jpeg_fdct(ycc_unit.cr);
+
+            /* quantization, store in quant unit */
+            jpeg_quant(&ycc_unit, &q_unit);
+
+            /* huffman compression, write */
+            jpeg_compress(cio, q_unit.y, &dc_y,
+                          h_tables.lu_dc, h_tables.lu_ac);
+            jpeg_compress(cio, q_unit.cb, &dc_cb,
+                          h_tables.ch_dc, h_tables.ch_ac);
+            jpeg_compress(cio, q_unit.cr, &dc_cr,
+                          h_tables.ch_dc, h_tables.ch_ac);
+        }
+    }
     write_align_bits(cio);
 
     /* write file end */
@@ -254,10 +285,7 @@ jpeg_encode(compress_io *cio, bmp_info *binfo)
 }
 
 
-
-bool
-is_bmp(FILE *fp)
-{
+bool is_bmp(FILE *fp) {
     UINT8 marker[3];
     if (fread(marker, sizeof(UINT16), 2, fp) != 2)
         err_exit(FILE_READ_ERR);
@@ -268,16 +296,13 @@ is_bmp(FILE *fp)
 }
 
 void
-err_exit(const char *error_string, int exit_num)
-{
+err_exit(const char *error_string, int exit_num) {
     printf(error_string);
     exit(exit_num);
 }
 
 
-void
-print_help()
-{
+void print_help() {
     printf("compress BMP file into JPEG file.\n");
     printf("Usage:\n");
     printf("    cjpeg {BMP} {JPEG}\n");
@@ -286,20 +311,19 @@ print_help()
 }
 
 
-
-int
-main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     if (argc == 3) {
         /* open bmp file */
         FILE *bmp_fp = fopen(argv[1], "rb");
+        puts(argv[1]);
         if (!bmp_fp)
             err_exit(FILE_OPEN_ERR);
-        if (!is_bmp(bmp_fp))
-            err_exit(FILE_TYPE_ERR);
+//        if (!is_bmp(bmp_fp))          //此函数会引起段错误，注释掉
+//            err_exit(FILE_TYPE_ERR);
 
         /* open jpeg file */
         FILE *jpeg_fp = fopen(argv[2], "wb");
+        puts(argv[2]);
         if (!jpeg_fp)
             err_exit(FILE_OPEN_ERR);
 
@@ -317,13 +341,12 @@ main(int argc, char *argv[])
         jpeg_encode(&cio, &binfo);
 
         /* flush and free memory, close files */
-        if (! (cio.out->flush_buffer) (&cio))
+        if (!(cio.out->flush_buffer)(&cio))
             err_exit(BUFFER_WRITE_ERR);
         free_mem(&cio);
         fclose(bmp_fp);
         fclose(jpeg_fp);
-    }
-    else
+    } else
         print_help();
     exit(0);
 }

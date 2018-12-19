@@ -20,6 +20,9 @@ flush_cin_buffer(void *cio)
     memset(in->set, 0, len);
     if (fread(in->set, sizeof(UINT8), len, in->fp) != len)
         return false;
+#ifdef REVERSED
+    fseek(in->fp, -len * 2, SEEK_CUR);
+#endif
     in->pos = in->set;
     return true;
 }
@@ -119,6 +122,27 @@ write_bits(compress_io *cio, BITS bits)
     /*            finish the missing codes                */
     /*                                                    */
     /******************************************************/
+    BITS *temp = &(cio->temp_bits);
+    UINT16 word;
+    UINT8 byte1, byte2;
+    int len = bits.len + temp->len - 16;
+    if (len >= 0) {
+        word = temp->val | bits.val >> len;
+        byte1 = word >> 8;
+        write_byte(cio, byte1);
+        if (byte1 == 0xFF)
+            write_byte(cio, 0);
+        byte2 = word & 0xFF;
+        write_byte(cio, byte2);
+        if (byte2 == 0xFF)
+            write_byte(cio, 0);
+        temp->len = len;
+        temp->val = bits.val << (16 - len);
+    }
+    else {
+        temp->len = 16 + len;
+        temp->val |= bits.val << -len;
+    }
 }
 
 void
@@ -129,5 +153,18 @@ write_align_bits(compress_io *cio)
     /*            finish the missing codes                */
     /*                                                    */
     /******************************************************/
+
+    BITS *temp = &(cio->temp_bits);
+    BITS align_bits;
+    align_bits.len = 8 - temp->len % 8;
+    align_bits.val = (UINT16) ~0x0 >> temp->len % 8;
+    UINT8 byte;
+    write_bits(cio, align_bits);
+    if (temp->len == 8) {
+        byte = temp->val >> 8;
+        write_byte(cio, byte);
+        if (byte == 0xFF)
+            write_byte(cio, 0);
+    }
 }
 
